@@ -102,7 +102,7 @@ export default function RecordModal({ month, record, onClose, onChanged }: Props
         {error && <p role="alert">{error}</p>}
         <form onSubmit={(ev) => void save(ev)}>
           <label>
-            이름 (필수)
+            지출 목록 (필수)
             <input value={name} onChange={(e) => setName(e.target.value)} />
             {fieldError('name')}
           </label>
