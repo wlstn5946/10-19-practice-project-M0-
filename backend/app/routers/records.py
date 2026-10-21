@@ -1,6 +1,6 @@
 import sqlite3
 
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException, Query, Response
 
 from app.db import get_conn
 from app.schemas import RecordIn, RecordOut
@@ -35,8 +35,16 @@ def create_record(body: RecordIn, conn: sqlite3.Connection = Depends(get_conn)):
 
 
 @router.get("", response_model=list[RecordOut])
-def list_records(conn: sqlite3.Connection = Depends(get_conn)):
-    rows = conn.execute(f"SELECT {COLUMNS} FROM records ORDER BY id DESC").fetchall()
+def list_records(
+    month: int | None = Query(default=None, ge=1, le=12),
+    conn: sqlite3.Connection = Depends(get_conn),
+):
+    sql = f"SELECT {COLUMNS} FROM records"
+    params: tuple = ()
+    if month is not None:
+        sql += " WHERE month = ?"
+        params = (month,)
+    rows = conn.execute(sql + " ORDER BY id DESC", params).fetchall()
     return [dict(r) for r in rows]
 
 

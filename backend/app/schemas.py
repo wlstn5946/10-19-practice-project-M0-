@@ -23,3 +23,8 @@ class RecordOut(BaseModel):
     budget: int | None
     feedback: str | None
     month: int
+
+
+class SummaryOut(BaseModel):
+    settlement_total: int | None
+    budget_total: int | None
