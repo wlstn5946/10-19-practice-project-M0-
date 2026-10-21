@@ -47,3 +47,43 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 export function listRecords(month: number): Promise<BudgetRecord[]> {
   return request(`/api/records?month=${month}`)
 }
+
+// 금액·이름은 검증을 서버가 하므로 화면은 값을 그대로 보낸다.
+export type RecordInput = {
+  name: string
+  settlement: number | string | null
+  budget: number | string | null
+  feedback: string | null
+  month: number
+}
+
+export type Summary = {
+  settlement_total: number | null
+  budget_total: number | null
+}
+
+const json = (method: string, body: unknown): RequestInit => ({
+  method,
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(body),
+})
+
+export function createRecord(input: RecordInput): Promise<BudgetRecord> {
+  return request('/api/records', json('POST', input))
+}
+
+export function updateRecord(id: number, input: RecordInput): Promise<BudgetRecord> {
+  return request(`/api/records/${id}`, json('PUT', input))
+}
+
+export function deleteRecord(id: number): Promise<void> {
+  return request(`/api/records/${id}`, { method: 'DELETE' })
+}
+
+export function monthlySummary(month: number): Promise<Summary> {
+  return request(`/api/summary/monthly?month=${month}`)
+}
+
+export function totalSummary(): Promise<Summary> {
+  return request('/api/summary/total')
+}

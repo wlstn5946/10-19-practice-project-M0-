@@ -1,10 +1,11 @@
 type Props = {
   onSelectMonth: (month: number) => void
+  onOpenTotal: () => void
 }
 
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1)
 
-export default function HomePage({ onSelectMonth }: Props) {
+export default function HomePage({ onSelectMonth, onOpenTotal }: Props) {
   return (
     <section>
       <h1>가계부</h1>
@@ -15,6 +16,11 @@ export default function HomePage({ onSelectMonth }: Props) {
           </button>
         ))}
       </div>
+      <p>
+        <button type="button" onClick={onOpenTotal}>
+          총 정산
+        </button>
+      </p>
     </section>
   )
 }

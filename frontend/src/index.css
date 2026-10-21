@@ -26,3 +26,51 @@ main {
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
+
+.summary-bar {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid #999;
+  font-weight: bold;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  width: min(420px, calc(100% - 2rem));
+  padding: 1rem 1.25rem;
+  background: #fff;
+  color: #000;
+  border-radius: 6px;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.modal input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field-error {
+  display: block;
+  color: #b00020;
+  font-size: 0.85rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
