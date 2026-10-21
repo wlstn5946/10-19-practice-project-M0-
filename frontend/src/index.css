@@ -8,3 +8,21 @@ main {
   margin: 3rem auto;
   padding: 0 1rem;
 }
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.record-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.record-list th,
+.record-list td {
+  padding: 0.4rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}

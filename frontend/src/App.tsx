@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import HomePage from './pages/HomePage'
+import MonthPage from './pages/MonthPage'
+
+type Page = { name: 'home' } | { name: 'month'; month: number }
 
 function App() {
-  const [health, setHealth] = useState('확인 중...')
-
-  useEffect(() => {
-    fetch('/api/health')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
-      .then((data: { status: string }) => setHealth(data.status))
-      .catch(() => setHealth('API 연결 실패'))
-  }, [])
+  const [page, setPage] = useState<Page>({ name: 'home' })
 
   return (
     <main>
-      <h1>task-flow</h1>
-      <p>API 상태: {health}</p>
+      {page.name === 'home' && (
+        <HomePage onSelectMonth={(month) => setPage({ name: 'month', month })} />
+      )}
+      {page.name === 'month' && (
+        <MonthPage month={page.month} onBack={() => setPage({ name: 'home' })} />
+      )}
     </main>
   )
 }
