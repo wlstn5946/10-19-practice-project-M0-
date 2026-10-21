@@ -20,7 +20,7 @@ export default function RecordList({ records, onEdit }: Props) {
     <table className="record-list">
       <thead>
         <tr>
-          <th>이름</th>
+          <th>지출 목록</th>
           <th>결산</th>
           <th>예산</th>
           <th>차액</th>
